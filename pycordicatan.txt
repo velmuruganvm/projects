@@ -1,0 +1,75 @@
+import math
+
+def cordic_atan(iterations, angle):
+    x = 1.0  # Initialize x to 1.0
+    y = angle
+    z = 0.0
+
+    for i in range(iterations):
+        if y < 0:
+            d = -1
+        else:
+            d = 1
+
+        x_next = x + d * y * 2**-i
+        y_next = y - d * x * 2**-i
+        z_next = z + d * math.atan(2**-i)
+        
+        # Print intermediate values after each iteration
+        print(f"Iteration {i + 1}:")
+        print(f"x_next = {x_next:.10f}")
+        print(f"y_next = {y_next:.10f}")
+        print(f"z_next = {z_next:.10f}")
+        print(f"atan(2**-{i}) = {math.atan(2**-i):.10f}")
+        print(f"2**-{i} = {2**-i:.10f}")
+        print("-------------")
+        
+        x, y, z = x_next, y_next, z_next
+
+    return z
+
+# Set the angle value for which to calculate the arctangent
+angle = 2  # You can change this value to test other angles
+iterations = 10
+
+atan_value = cordic_atan(iterations, angle)
+
+print(f"Input value: {angle}")
+print(f"Arctangent: {atan_value:.10f}")
+
+
+#====================================================================================
+
+
+
+
+def cordic_sine_cosine(iterations, angle_rad):
+    x = 0.606 # discussed in chapter 4  (eq 4.4)
+    y = 0.0
+    z = angle_rad
+    for i in range(iterations):
+        if z < 0:
+            d = -1
+        else:
+            d = 1
+        x_next = x - d * y * 2**-i
+        y_next = y + d * x * 2**-i
+        z_next = z - d * math.atan(2**-i)
+        # Print intermediate values after each iteration
+        print(f"Iteration {i + 1}:")
+        print(f"x_next = {x_next:.10f}")
+        print(f"y_next = {y_next:.10f}")
+        print(f"z_next = {z_next:.10f}")
+        print(f"atan(2**-{i}) = {math.atan(2**-i):.10f}")
+        print(f"2**-{i} = {2**-i:.10f}")
+        print("-------------")
+        x, y, z = x_next, y_next, z_next
+    return x, y
+# Set the angle to 45.0 degrees to calculate sine and cosine
+angle_degrees = 89
+angle_radians = math.radians(angle_degrees)
+iterations = 8
+cosine, sine = cordic_sine_cosine(iterations, angle_radians)
+print(f"Angle: {angle_degrees} degrees")
+print(f"Cosine: {cosine:.10f}")
+print(f"Sine: {sine:.10f}")
