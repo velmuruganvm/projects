@@ -5,7 +5,7 @@ it can also calculate tan inverse function by need to multiply with 57.32 to get
 checked all modules provide high accuracy in short time
 wrote Verilog code and verified in altera Quartus.
 for cordicn10{
-change value for c to sine and cos values in output described above
+change value for c to sine and cos values in output described below
 change value for b to calculate atan or taninverse value.
 
 use vr=1 for tan inverse (output=o3)and vr=0 for sine and cos (output cos =o1 and sine =o2)
